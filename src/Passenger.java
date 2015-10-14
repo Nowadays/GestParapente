@@ -5,7 +5,8 @@
 public class Passenger extends Person{
 	private int level;
 
-	public Passenger(){
-
+	public Passenger(String name, String lastName, String adress, int age, int level){
+		super(name,lastName,adress,age);
+		this.level = level;
 	}
 }

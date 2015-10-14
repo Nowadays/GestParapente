@@ -3,4 +3,7 @@
  * Project name : GestParapente.
  */
 public class Para {
+    public Para(){
+
+    }
 }
