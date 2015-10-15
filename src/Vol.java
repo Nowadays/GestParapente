@@ -1,4 +1,10 @@
+import sun.util.resources.cldr.af.CalendarData_af_NA;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Created by deodexed on 15/10/2015.
@@ -8,7 +14,8 @@ public class Vol {
 
 	private String site_depart;
 	private String site_arrive;
-	private Calendar jour;
+	private Date jour;
+	Calendar calendrier;
 	private String id_vol;
 	private int duree;
 
@@ -17,51 +24,17 @@ public class Vol {
 		this.site_arrive = site_arrive;
 		this.id_vol = id_vol;
 		this.duree =duree;
+		jour = new Date();
+		calendrier = GregorianCalendar.getInstance();
+		calendrier.setTime(jour);
 	}
 
-	public Vol(){
-		jour = new Calendar() {
-			@Override
-			protected void computeTime() {
-
-			}
-
-			@Override
-			protected void computeFields() {
-
-			}
-
-			@Override
-			public void add(int field, int amount) {
-
-			}
-
-			@Override
-			public void roll(int field, boolean up) {
-
-			}
-
-			@Override
-			public int getMinimum(int field) {
-				return 0;
-			}
-
-			@Override
-			public int getMaximum(int field) {
-				return 0;
-			}
-
-			@Override
-			public int getGreatestMinimum(int field) {
-				return 0;
-			}
-
-			@Override
-			public int getLeastMaximum(int field) {
-				return 0;
-			}
-		};
-
+	public Vol(String site_depart, String site_arrive, String id_vol, int duree, Calendar calendrier){
+		this.site_depart = site_depart;
+		this.site_arrive = site_arrive;
+		this.id_vol = id_vol;
+		this.duree =duree;
+		this.calendrier = calendrier;
 	}
 
 	public String getSite_depart(){
@@ -73,7 +46,7 @@ public class Vol {
 	}
 
 	public Calendar getDateVol(){
-		return this.jour;
+		return this.calendrier;
 	}
 
 	public String getId_vol(){
@@ -84,39 +57,36 @@ public class Vol {
 		return this.duree;
 	}
 
-	public void setJour(int heure, int minute , int jour, int mois) {
-		this.jour.set(Calendar.DAY_OF_MONTH,jour);
-		this.jour.set(Calendar.HOUR,heure);
-		this.jour.set(Calendar.MONTH,mois);
-		this.jour.set(Calendar.MINUTE, minute);
-	}
-
 	public String getStringJour(){
 		return this.jour.toString();
 	}
 
 	public int getJourVol(){
-		return this.jour.get(Calendar.DAY_OF_MONTH);
+		return this.calendrier.get(Calendar.DAY_OF_MONTH);
 	}
 
 	public int getHeureVol(){
-		return this.jour.get(Calendar.HOUR);
+		return this.calendrier.get(Calendar.HOUR_OF_DAY);
 	}
 
 	public int getMoisVol(){
-		return this.jour.get(Calendar.MONTH);
+		return this.calendrier.get(Calendar.MONTH)+1;
 	}
 
 	public int getMinuteVol(){
-		return this.jour.get(Calendar.MINUTE);
+		return this.calendrier.get(Calendar.MINUTE);
 	}
 
 	/*public static void main(String[] args) {
-		Vol vol = new Vol();
-		Vol vol2 = new Vol();
-		vol.setJour(10,30, 14, 12);
-		System.out.println(vol.getJourVol() + "h"+ vol.getMinuteVol()+" le: " + vol.getHeureVol() + "/" + vol.getMoisVol());
+		Calendar c = GregorianCalendar.getInstance();
+		c.set(1995,Calendar.DECEMBER,30);
+		Vol vol = new Vol("a","b","50215",5,c);
 
+		//vol.setJour(10,30, 14, 12);
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		System.out.println(dateFormat.format(date)); //2014/08/06 15:59:48
+		System.out.println(vol.getHeureVol() + "h"+ vol.getMinuteVol()+" le: " + vol.getJourVol() + "/" + vol.getMoisVol());
 	}*/
 }
 
