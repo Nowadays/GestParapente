@@ -19,6 +19,51 @@ public class Vol {
 		this.duree =duree;
 	}
 
+	public Vol(){
+		jour = new Calendar() {
+			@Override
+			protected void computeTime() {
+
+			}
+
+			@Override
+			protected void computeFields() {
+
+			}
+
+			@Override
+			public void add(int field, int amount) {
+
+			}
+
+			@Override
+			public void roll(int field, boolean up) {
+
+			}
+
+			@Override
+			public int getMinimum(int field) {
+				return 0;
+			}
+
+			@Override
+			public int getMaximum(int field) {
+				return 0;
+			}
+
+			@Override
+			public int getGreatestMinimum(int field) {
+				return 0;
+			}
+
+			@Override
+			public int getLeastMaximum(int field) {
+				return 0;
+			}
+		};
+
+	}
+
 	public String getSite_depart(){
 		return this.site_depart;
 	}
@@ -39,8 +84,11 @@ public class Vol {
 		return this.duree;
 	}
 
-	public void setJour(){
-		this.jour.set(Calendar.HOUR_OF_DAY,Calendar.DAY_OF_MONTH,Calendar.MONTH);
+	public void setJour(int heure, int minute , int jour, int mois) {
+		this.jour.set(Calendar.DAY_OF_MONTH,jour);
+		this.jour.set(Calendar.HOUR,heure);
+		this.jour.set(Calendar.MONTH,mois);
+		this.jour.set(Calendar.MINUTE, minute);
 	}
 
 	public String getStringJour(){
@@ -54,4 +102,26 @@ public class Vol {
 	public int getHeureVol(){
 		return this.jour.get(Calendar.HOUR);
 	}
+
+	public int getMoisVol(){
+		return this.jour.get(Calendar.MONTH);
+	}
+
+	public int getMinuteVol(){
+		return this.jour.get(Calendar.MINUTE);
+	}
+
+	/*public static void main(String[] args) {
+		Vol vol = new Vol();
+		Vol vol2 = new Vol();
+		vol.setJour(10,30, 14, 12);
+		System.out.println(vol.getJourVol() + "h"+ vol.getMinuteVol()+" le: " + vol.getHeureVol() + "/" + vol.getMoisVol());
+
+	}*/
 }
+
+
+
+
+
+
