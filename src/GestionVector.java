@@ -35,41 +35,41 @@ public abstract class GestionVector{
 
     }*/
 
-    /*public Vector<Parapente> getvParapente(){
-        return this.vParapente;
+    public static Vector<Parapente> getvParapente(){
+        return vParapente;
     }
 
-    public Vector<Personne> getvPersonne(){
-        return this.vPersonne;
+    public static Vector<Personne> getvPersonne(){
+        return vPersonne;
     }
 
-    public Vector<Vol> getvVol(){
-        return this.vVol;
+    public static Vector<Vol> getvVol(){
+        return vVol;
     }
 
-    public void addInvPersonne(Personne p){
-        this.vPersonne.add(p);
+    public static void addInvPersonne(Personne p){
+        vPersonne.add(p);
     }
 
-    public void addInvParapente(Parapente p){
-        this.vParapente.add(p);
+    public static void addInvParapente(Parapente p){
+        vParapente.add(p);
     }
 
-    public void addInvVol(Vol v){
-        this.vVol.add(v);
+    public static void addInvVol(Vol v){
+        vVol.add(v);
     }
 
-    public void removeInvPersonne(Personne p){
-        this.vPersonne.remove(p);
+    public static void removeInvPersonne(Personne p){
+        vPersonne.remove(p);
     }
 
-    public void removeInvParapente(Parapente p){
-        this.vParapente.remove(p);
+    public static void removeInvParapente(Parapente p){
+        vParapente.remove(p);
     }
 
-    public void removeInvVol(Vol v){
-        this.vVol.remove(v);
-    }*/
+    public static void removeInvVol(Vol v){
+        vVol.remove(v);
+    }
 
     public static void setVectorParapente(Vector<Parapente> parapentes){
         vParapente = parapentes;
