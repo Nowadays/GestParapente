@@ -14,11 +14,15 @@ public class Personne {
 	private int poid;
 	private int taille;
 	private String no_telephone;
+    private String ville;
+    private int code_postal;
 
-    public Personne(String nom, String prenom, String adresse, int age, Date date_naissance, int poid, int taille, String no_telephone){
+    public Personne(String nom, String prenom, String adresse,String ville,int code_postal, int age, Date date_naissance, int poid, int taille, String no_telephone){
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
+        this.ville = ville;
+        this.code_postal = code_postal;
         this.age = age;
 		this.date_naissance = date_naissance;
 		this.poid = poid;

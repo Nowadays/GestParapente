@@ -5,7 +5,7 @@ import java.util.Vector;
  * Created by Morgan on 15/10/2015.
  * Project name : GestParapente.
  */
-public abstract class GestionVector{
+public class GestionVector{
 
     public static final String nom_fichier_parapente="parapente.para";
     public static final String nom_fichier_personne="personne.para";
@@ -27,13 +27,12 @@ public abstract class GestionVector{
     public static Vector<Vol> vVol;
     public static Vector<GestionVol> vGestionVol;
 
-    /*public GestionVector() throws IOException {
+    public GestionVector() throws IOException {
         vParapente = new Vector<>();
         vPersonne = new Vector<>();
         vVol = new Vector<>();
-
-
-    }*/
+        vGestionVol = new Vector<>();
+    }
 
     public static Vector<Parapente> getvParapente(){
         return vParapente;

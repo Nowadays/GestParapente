@@ -11,8 +11,8 @@ public class Pilote extends Personne {
     private int niveau;
     private static int nb_pilote = 0;
 
-    public Pilote(String nom, String prenom, String adresse, int age, Date date_naissance, int poid, int taille, String no_telephone, String no_licence, int niveau){
-        super(nom,prenom,adresse,age,date_naissance,poid,taille,no_telephone);
+    public Pilote(String nom, String prenom, String adresse,String ville,int code_postal, int age, Date date_naissance, int poid, int taille, String no_telephone, String no_licence, int niveau){
+        super(nom,prenom,adresse,ville,code_postal,age,date_naissance,poid,taille,no_telephone);
         this.no_licence = no_licence;
 	    this.niveau = niveau;
         nb_pilote++;

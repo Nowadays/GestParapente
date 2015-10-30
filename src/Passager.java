@@ -9,8 +9,8 @@ public class Passager extends Personne {
 	private String id_passager;
 	private int niveau;
 
-	public Passager(String name, String lastName, String adress, int age, Date date_naissance, int poid, int taille, String no_telephone, String id_passager, int niveau){
-		super(name,lastName,adress,age,date_naissance,poid,taille,no_telephone);
+	public Passager(String name, String lastName, String adress,String ville,int code_postal, int age, Date date_naissance, int poid, int taille, String no_telephone, String id_passager, int niveau){
+		super(name,lastName,adress,ville,code_postal,age,date_naissance,poid,taille,no_telephone);
 		this.id_passager = id_passager;
 		this.niveau = niveau;
 	}

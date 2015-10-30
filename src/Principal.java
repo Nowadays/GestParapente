@@ -13,6 +13,7 @@ public class Principal {
         splash.splashOn();
         Thread.sleep(1000);
         splash.setProgress(20,"Init");
+        new GestionVector();
         GestionVector.initInputFile();
         splash.setProgress(60,"Loading files");
         GestionVector.readAllVector();
