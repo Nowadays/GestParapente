@@ -43,6 +43,7 @@ public class JPanelPersonne extends JDialog {
     private JLabel noLicence;
     private JLabel taille;
     private JLabel poid;
+    private JLabel niveau;
 
     private JTextField saisieNom;
     private JTextField saisiePrenom;
@@ -53,6 +54,7 @@ public class JPanelPersonne extends JDialog {
     private JTextField saisieNoLicence;
     private JTextField saisieTaille;
     private JTextField saisiePoid;
+    private JTextField saisieNiveau;
 
     private String name;
     private String fname;
@@ -60,9 +62,11 @@ public class JPanelPersonne extends JDialog {
     private String phone;
     private String adress;
     private String city;
-    private String height;
+    private String level;
+    private int height;
     private int weight;
     private int code;
+    private String noLicenceS;
 
     private String choix1;
     private String choix2;
@@ -79,6 +83,7 @@ public class JPanelPersonne extends JDialog {
 
     private final String numeroDefault = "Num\u00e9ro de tel. (*) : ";
     private final String codePostalDefault = "Code postal (*) : ";
+    private final String noLicenceDefault = "Num de licence (*): ";
 
     private final static Color GREY_TEXT = new Color(0x9E9E9E);
     private final static Color GREY_BACKGROUND = new Color(0x616161);
@@ -91,6 +96,7 @@ public class JPanelPersonne extends JDialog {
         this.setTitle("Ajouter un client");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        this.setModal(true);
         this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         this.createGUI();
     }
@@ -124,6 +130,7 @@ public class JPanelPersonne extends JDialog {
         saisieNom.addKeyListener(new MyListener());
         saisieNom.setBorder(null);
         saisieNom.setBackground(GREY_TEXTFIELD);
+        saisieNom.setAlignmentX(Component.RIGHT_ALIGNMENT);
 
         panelSaisieNom = new JPanel();
         panelSaisieNom.setLayout(new BoxLayout(panelSaisieNom, BoxLayout.X_AXIS));
@@ -138,6 +145,7 @@ public class JPanelPersonne extends JDialog {
         saisiePrenom.addKeyListener(new MyListener());
         saisiePrenom.setBorder(null);
         saisiePrenom.setBackground(GREY_TEXTFIELD);
+        saisiePrenom.setAlignmentX(Component.RIGHT_ALIGNMENT);
 
         panelSaisiePrenom = new JPanel();
         panelSaisiePrenom.setLayout(new BoxLayout(panelSaisiePrenom, BoxLayout.X_AXIS));
@@ -176,7 +184,7 @@ public class JPanelPersonne extends JDialog {
         ville = new JLabel("Ville (*) : ");
         ville.setForeground(GREY_TEXT);
         saisieVille = new JTextField();
-        saisieVille.setPreferredSize(new Dimension(120,20));
+        saisieVille.setPreferredSize(new Dimension(50,20));
         saisieVille.setBorder(null);
         saisieVille.setBackground(GREY_TEXTFIELD);
         saisieVille.addKeyListener(new MyListener());
@@ -222,20 +230,31 @@ public class JPanelPersonne extends JDialog {
 
         //panel no licence
 
-        noLicence = new JLabel("N° de licence (*): ");
+        noLicence = new JLabel("Num de licence (*): ");
         noLicence.setForeground(GREY_TEXT);
+        niveau = new JLabel("Niveau (*): ");
+        niveau.setForeground(GREY_TEXT);
 
         saisieNoLicence = new JTextField();
         saisieNoLicence.setPreferredSize(new Dimension(120, 20));
         saisieNoLicence.addKeyListener(new MyListener());
         saisieNoLicence.setBorder(null);
         saisieNoLicence.setBackground(GREY_TEXTFIELD);
+        saisieNiveau = new JTextField();
+        saisieNiveau.setPreferredSize(new Dimension(50,20));
+        saisieNiveau.addKeyListener(new MyListener());
+        saisieNiveau.setBorder(null);
+        saisieNiveau.setBackground(GREY_TEXTFIELD);
+
 
         panelNoLicence = new JPanel();
         panelNoLicence.setLayout(new BoxLayout(panelNoLicence,BoxLayout.X_AXIS));
         panelNoLicence.setBackground(new Color(0x424242));
         panelNoLicence.add(noLicence);
         panelNoLicence.add(saisieNoLicence);
+        panelNoLicence.add(Box.createRigidArea(new Dimension(ESPACE,1)));
+        panelNoLicence.add(niveau);
+        panelNoLicence.add(saisieNiveau);
 
         //panel poid taille
         taille = new JLabel("Taille (*): ");
@@ -244,11 +263,11 @@ public class JPanelPersonne extends JDialog {
         poid.setForeground(GREY_TEXT);
         saisieTaille = new JTextField();
         saisieTaille.setBackground(GREY_TEXTFIELD);
-        saisieTaille.setPreferredSize(new Dimension(50,20));
+        saisieTaille.setPreferredSize(new Dimension(30,20));
         saisieTaille.setBorder(null);
         saisiePoid = new JTextField();
         saisiePoid.setBackground(GREY_TEXTFIELD);
-        saisiePoid.setPreferredSize(new Dimension(50,20));
+        saisiePoid.setPreferredSize(new Dimension(30,20));
         saisiePoid.setBorder(null);
         panelTaillePoid = new JPanel();
         panelTaillePoid.setLayout(new BoxLayout(panelTaillePoid,BoxLayout.X_AXIS));
@@ -265,11 +284,11 @@ public class JPanelPersonne extends JDialog {
         panelPrincipal.setLayout(new BoxLayout(panelPrincipal, BoxLayout.Y_AXIS));
         panelPrincipal.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         panelPrincipal.setBackground(new Color(0x424242));
-        panelPrincipal.add(panelCivNum);
-        panelPrincipal.add(Box.createRigidArea(new Dimension(1,ESPACE)));
         panelPrincipal.add(panelSaisieNom);
         panelPrincipal.add(Box.createRigidArea(new Dimension(1,ESPACE)));
         panelPrincipal.add(panelSaisiePrenom);
+        panelPrincipal.add(Box.createRigidArea(new Dimension(1,ESPACE)));
+        panelPrincipal.add(panelCivNum);
         panelPrincipal.add(Box.createRigidArea(new Dimension(1,ESPACE)));
         panelPrincipal.add(panelAdresse);
         panelPrincipal.add(Box.createRigidArea(new Dimension(1,ESPACE)));
@@ -301,6 +320,12 @@ public class JPanelPersonne extends JDialog {
                 city = saisieVille.getText();
                 code = Integer.parseInt(saisieCodePostal.getText());
                 weight = Integer.parseInt(saisiePoid.getText());
+                height = Integer.parseInt(saisieTaille.getText());
+                level = saisieNiveau.getText();
+                noLicenceS = saisieNoLicence.getText();
+
+               // GestionVector.addInvPersonne(new Pilote(name,fname,adress,city,code,));
+
 
                 dispose();
             }
@@ -309,10 +334,18 @@ public class JPanelPersonne extends JDialog {
         }
 
         public void keyTyped(KeyEvent e) {
-            Runnable switchToCodePostal = saisieCodePostal::requestFocus;
+
+        }
+
+        public void keyPressed(KeyEvent e) {
+            Runnable switchToAdress = saisieAdresse::requestFocus;
             Runnable switchToVille = saisieVille::requestFocus;
+            Runnable switchToPoid = saisiePoid::requestFocus;
+            Runnable switchToNoLicence = saisieNoLicence::requestFocus;
+            Runnable switchToNiveau = saisieNiveau::requestFocus;
             numero.setText(numeroDefault);
             codePostal.setText(codePostalDefault);
+            noLicence.setText(noLicenceDefault);
 
             if((e.getKeyChar() < KeyEvent.VK_0 || e.getKeyChar() > KeyEvent.VK_9) && (e.getSource()==saisieNumero)) {
                 numero.setText("Entrez un num\u00e9ro de t\u00e9l\u00e9phone");
@@ -321,14 +354,14 @@ public class JPanelPersonne extends JDialog {
                 if (!(saisieNumero.getText().equals(""))){
                     numero.setText(numeroDefault);
                     if(saisieNumero.getText().length()==9 && saisieNumero.hasFocus()){
-                        SwingUtilities.invokeLater(switchToCodePostal);
+                        SwingUtilities.invokeLater(switchToAdress);
                     }
 
                 }
             }
 
 
-                //codePostal.setText("Entrez un entier");
+            //codePostal.setText("Entrez un entier");
 
 
             if((e.getKeyChar() < KeyEvent.VK_0 || e.getKeyChar() > KeyEvent.VK_9) && (e.getSource()==saisieCodePostal)) {
@@ -343,10 +376,36 @@ public class JPanelPersonne extends JDialog {
                 }
             }
 
+            if(saisieTaille.getText().length()==2 && saisieTaille.hasFocus()){
+                SwingUtilities.invokeLater(switchToPoid);
+            }
+
+            if(saisiePoid.getText().length()==2 && saisiePoid.hasFocus()){
+                SwingUtilities.invokeLater(switchToNoLicence);
+            }
+
+            if((e.getKeyChar() < KeyEvent.VK_0 || e.getKeyChar() > KeyEvent.VK_9) && (e.getSource()==saisieNoLicence)) {
+                noLicence.setText("Entrez un num de licence");
+            }
+            else{
+                if(!(saisieNoLicence.getText().equals(""))){
+                    noLicence.setText(noLicenceDefault);
+                    if(saisieNoLicence.getText().length()==9 && saisieNoLicence.hasFocus()){
+                        SwingUtilities.invokeLater(switchToNiveau);
+                    }
+                }
+            }
 
 
 
-            if(!((saisiePoid.getText().equals("") || saisieTaille.getText().equals("")) || (saisieNumero.getText().equals(""))||(saisieNom.getText().equals(""))||(saisiePrenom.getText().equals("")) ||(saisieCodePostal.getText().equals(""))||(saisieAdresse.getText().equals(""))||(saisieVille.getText().equals(""))||(saisieNoLicence.getText().equals("")))){
+
+
+
+
+            if(!(saisiePoid.getText().equals("") || saisieTaille.getText().equals("") || saisieNumero.getText().equals("")||
+                    saisieNom.getText().equals("")||saisiePrenom.getText().equals("") ||(saisieCodePostal.getText().equals("")||
+                    saisieAdresse.getText().equals(""))||saisieVille.getText().equals("")||saisieNoLicence.getText().equals("") ||
+                    saisieNiveau.getText().equals("") || saisiePoid.getText().equals("") || saisieTaille.getText().equals(""))){
                 bnOK.setBackground(GREY_BACKGROUND);
                 bnOK.setForeground(GREY_TEXT);
                 bnOK.setEnabled(true);
@@ -355,10 +414,6 @@ public class JPanelPersonne extends JDialog {
                 bnOK.setForeground(GREY_BACKGROUND);
                 bnOK.setEnabled(false);
             }
-        }
-
-        public void keyPressed(KeyEvent e) {
-
         }
 
         public void keyReleased(KeyEvent e) {
@@ -376,9 +431,6 @@ public class JPanelPersonne extends JDialog {
     }
     public String getPhone(){
         return this.phone;
-    }
-    public String getCivility(){
-        return this.civility;
     }
     public String getAdress(){
         return this.adress;

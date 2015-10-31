@@ -23,7 +23,7 @@ public class Personne {
         this.adresse = adresse;
         this.ville = ville;
         this.code_postal = code_postal;
-        this.age = age;
+       // this.age = age;
 		this.date_naissance = date_naissance;
 		this.poid = poid;
 		this.taille = taille;
