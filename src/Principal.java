@@ -1,6 +1,3 @@
-import com.thehowtotutorial.splashscreen.JSplash;
-
-import java.awt.*;
 import java.io.IOException;
 
 /**
@@ -9,7 +6,7 @@ import java.io.IOException;
  */
 public class Principal {
     public static void main(String[] args) throws InterruptedException, IOException, ClassNotFoundException {
-        JSplash splash = new JSplash(Principal.class.getResource("image2.jpg"),true,true,false,"V1.1",null, Color.blue,Color.black);
+       /* JSplash splash = new JSplash(Principal.class.getResource("image2.jpg"),true,true,false,"V1.1",null, Color.blue,Color.black);
         splash.splashOn();
         Thread.sleep(1000);
         splash.setProgress(20,"Init");
@@ -19,6 +16,6 @@ public class Principal {
         GestionVector.readAllVector();
         splash.setProgress(100,"Done");
         Thread.sleep(5000);
-        splash.splashOff();
+        splash.splashOff();*/
     }
 }
