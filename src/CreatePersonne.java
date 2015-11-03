@@ -10,7 +10,7 @@ import java.util.HashMap;
  * Created by Morgan on 28/10/2015.
  * Project name : GestParapente.
  */
-public class JPanelPersonne extends JDialog {
+public class CreatePersonne extends JDialog {
 
 
     private final int ESPACE=20;
@@ -65,7 +65,7 @@ public class JPanelPersonne extends JDialog {
     private String level;
     private int height;
     private int weight;
-    private int code;
+    private String code;
     private String noLicenceS;
 
     private String choix1;
@@ -92,59 +92,52 @@ public class JPanelPersonne extends JDialog {
 
 
 
-    public JPanelPersonne(){
+    public CreatePersonne(){
         this.setTitle("Ajouter un client");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setModal(true);
+        this.setAlwaysOnTop(true);
         this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         this.createGUI();
+        this.setVisible(true);
     }
 
     public void createGUI(){
         //saisie
 
         numero = new JLabel("Num\u00e9ro de tel. (*) : ");
-        numero.setForeground(GREY_TEXT);
         saisieNumero = new JTextField();
         saisieNumero.setPreferredSize(new Dimension(120,20));
         saisieNumero.setBorder(null);
-        saisieNumero.setBackground(GREY_TEXTFIELD);
         saisieNumero.addKeyListener(new MyListener());
 
         panelNumero = new JPanel();
         panelNumero.setLayout(new BoxLayout(panelNumero, BoxLayout.X_AXIS));
         panelNumero.add(numero);
         panelNumero.add(saisieNumero);
-        panelNumero.setBackground(new Color(0x424242));
 
         panelCivNum = new JPanel();
         panelCivNum.setLayout(new BoxLayout(panelCivNum, BoxLayout.X_AXIS));
         panelCivNum.add(panelNumero);
-        panelCivNum.setBackground(new Color(0x424242));
 
         nom = new JLabel("Nom (*) : ");
-        nom.setForeground(GREY_TEXT);
         saisieNom = new JTextField();
         saisieNom.setPreferredSize(new Dimension(120,20));
         saisieNom.addKeyListener(new MyListener());
         saisieNom.setBorder(null);
-        saisieNom.setBackground(GREY_TEXTFIELD);
         saisieNom.setAlignmentX(Component.RIGHT_ALIGNMENT);
 
         panelSaisieNom = new JPanel();
         panelSaisieNom.setLayout(new BoxLayout(panelSaisieNom, BoxLayout.X_AXIS));
         panelSaisieNom.add(nom);
         panelSaisieNom.add(saisieNom);
-        panelSaisieNom.setBackground(new Color(0x424242));
 
         prenom = new JLabel("Pr\u00e9nom (*) : ");
-        prenom.setForeground(GREY_TEXT);
         saisiePrenom = new JTextField();
         saisiePrenom.setPreferredSize(new Dimension(120,20));
         saisiePrenom.addKeyListener(new MyListener());
         saisiePrenom.setBorder(null);
-        saisiePrenom.setBackground(GREY_TEXTFIELD);
         saisiePrenom.setAlignmentX(Component.RIGHT_ALIGNMENT);
 
         panelSaisiePrenom = new JPanel();
@@ -154,12 +147,10 @@ public class JPanelPersonne extends JDialog {
         panelSaisiePrenom.setBackground(new Color(0x424242));
 
         adresse = new JLabel("Adresse (*) : ");
-        adresse.setForeground(GREY_TEXT);
         saisieAdresse = new JTextField();
         saisieAdresse.setPreferredSize(new Dimension(120,20));
         saisieAdresse.addKeyListener(new MyListener());
         saisieAdresse.setBorder(null);
-        saisieAdresse.setBackground(GREY_TEXTFIELD);
 
         panelAdresse = new JPanel();
         panelAdresse.setLayout(new BoxLayout(panelAdresse, BoxLayout.X_AXIS));
@@ -168,42 +159,34 @@ public class JPanelPersonne extends JDialog {
         panelAdresse.setBackground(new Color(0x424242));
 
         codePostal = new JLabel("Code postal (*) : ");
-        codePostal.setForeground(GREY_TEXT);
         saisieCodePostal = new JTextField();
         saisieCodePostal.setPreferredSize(new Dimension(50,20));
         saisieCodePostal.setBorder(null);
-        saisieCodePostal.setBackground(GREY_TEXTFIELD);
         saisieCodePostal.addKeyListener(new MyListener());
 
         panelCP = new JPanel();
         panelCP.setLayout(new BoxLayout(panelCP, BoxLayout.X_AXIS));
         panelCP.add(codePostal);
         panelCP.add(saisieCodePostal);
-        panelCP.setBackground(new Color(0x424242));
 
         ville = new JLabel("Ville (*) : ");
-        ville.setForeground(GREY_TEXT);
         saisieVille = new JTextField();
         saisieVille.setPreferredSize(new Dimension(50,20));
         saisieVille.setBorder(null);
-        saisieVille.setBackground(GREY_TEXTFIELD);
         saisieVille.addKeyListener(new MyListener());
 
         panelVille = new JPanel();
         panelVille.setLayout(new BoxLayout(	panelVille, BoxLayout.X_AXIS));
         panelVille.add(ville);
         panelVille.add(saisieVille);
-        panelVille.setBackground(new Color(0x424242));
 
         panelCPVille = new JPanel();
         panelCPVille.setLayout(new BoxLayout(panelCPVille, BoxLayout.X_AXIS));
         panelCPVille.add(panelCP);
         panelCPVille.add(Box.createRigidArea(new Dimension(ESPACE,1)));
         panelCPVille.add(panelVille);
-        panelCPVille.setBackground(new Color(0x424242));
 
         legende = new JLabel("(*) saisie obligatoire");
-        legende.setForeground(GREY_TEXT);
         legende.setAlignmentX(Component.RIGHT_ALIGNMENT);
 
 
@@ -212,13 +195,9 @@ public class JPanelPersonne extends JDialog {
         bnOK.setPreferredSize(new Dimension(80, 30));
         bnOK.addActionListener(new MyListener());
         bnOK.setEnabled(false);
-        bnOK.setBackground(GREY_TEXT);
-        bnOK.setForeground(GREY_BACKGROUND);
         bnAnnuler = new JButton("Annuler");
         bnAnnuler.setPreferredSize(new Dimension(80, 30));
         bnAnnuler.addActionListener(new MyListener());
-        bnAnnuler.setBackground(GREY_BACKGROUND);
-        bnAnnuler.setForeground(GREY_TEXT);
         panelBoutons = new JPanel();
         panelBoutons.add(legende);
         panelBoutons.setLayout(new BoxLayout(panelBoutons, BoxLayout.X_AXIS));
@@ -226,30 +205,24 @@ public class JPanelPersonne extends JDialog {
         panelBoutons.add(bnOK);
         panelBoutons.add(Box.createRigidArea(new Dimension(ESPACE,1)));
         panelBoutons.add(bnAnnuler);
-        panelBoutons.setBackground(new Color(0x424242));
 
         //panel no licence
 
         noLicence = new JLabel("Num de licence (*): ");
-        noLicence.setForeground(GREY_TEXT);
         niveau = new JLabel("Niveau (*): ");
-        niveau.setForeground(GREY_TEXT);
 
         saisieNoLicence = new JTextField();
         saisieNoLicence.setPreferredSize(new Dimension(120, 20));
         saisieNoLicence.addKeyListener(new MyListener());
         saisieNoLicence.setBorder(null);
-        saisieNoLicence.setBackground(GREY_TEXTFIELD);
         saisieNiveau = new JTextField();
         saisieNiveau.setPreferredSize(new Dimension(50,20));
         saisieNiveau.addKeyListener(new MyListener());
         saisieNiveau.setBorder(null);
-        saisieNiveau.setBackground(GREY_TEXTFIELD);
 
 
         panelNoLicence = new JPanel();
         panelNoLicence.setLayout(new BoxLayout(panelNoLicence,BoxLayout.X_AXIS));
-        panelNoLicence.setBackground(new Color(0x424242));
         panelNoLicence.add(noLicence);
         panelNoLicence.add(saisieNoLicence);
         panelNoLicence.add(Box.createRigidArea(new Dimension(ESPACE,1)));
@@ -258,20 +231,15 @@ public class JPanelPersonne extends JDialog {
 
         //panel poid taille
         taille = new JLabel("Taille (*): ");
-        taille.setForeground(GREY_TEXT);
         poid = new JLabel("Poid (*): ");
-        poid.setForeground(GREY_TEXT);
         saisieTaille = new JTextField();
-        saisieTaille.setBackground(GREY_TEXTFIELD);
         saisieTaille.setPreferredSize(new Dimension(30,20));
         saisieTaille.setBorder(null);
         saisiePoid = new JTextField();
-        saisiePoid.setBackground(GREY_TEXTFIELD);
         saisiePoid.setPreferredSize(new Dimension(30,20));
         saisiePoid.setBorder(null);
         panelTaillePoid = new JPanel();
         panelTaillePoid.setLayout(new BoxLayout(panelTaillePoid,BoxLayout.X_AXIS));
-        panelTaillePoid.setBackground(new Color(0x424242));
         panelTaillePoid.add(taille);
         panelTaillePoid.add(saisieTaille);
         panelTaillePoid.add(Box.createRigidArea(new Dimension(ESPACE,1)));
@@ -283,7 +251,6 @@ public class JPanelPersonne extends JDialog {
         panelPrincipal = new JPanel();
         panelPrincipal.setLayout(new BoxLayout(panelPrincipal, BoxLayout.Y_AXIS));
         panelPrincipal.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
-        panelPrincipal.setBackground(new Color(0x424242));
         panelPrincipal.add(panelSaisieNom);
         panelPrincipal.add(Box.createRigidArea(new Dimension(1,ESPACE)));
         panelPrincipal.add(panelSaisiePrenom);
@@ -318,13 +285,12 @@ public class JPanelPersonne extends JDialog {
                 phone = saisieNumero.getText();
                 adress = saisieAdresse.getText();
                 city = saisieVille.getText();
-                code = Integer.parseInt(saisieCodePostal.getText());
+                code = saisieCodePostal.getText();
                 weight = Integer.parseInt(saisiePoid.getText());
                 height = Integer.parseInt(saisieTaille.getText());
                 level = saisieNiveau.getText();
                 noLicenceS = saisieNoLicence.getText();
-
-               // GestionVector.addInvPersonne(new Pilote(name,fname,adress,city,code,));
+                GestionVector.addInvPersonne(new Pilote(name,fname,adress,city,code, weight,height,phone,noLicenceS,level));
 
 
                 dispose();
@@ -438,7 +404,7 @@ public class JPanelPersonne extends JDialog {
     public String getCity(){
         return this.city;
     }
-    public int getCode(){
+    public String getCode(){
         return this.code;
     }
     public boolean getButtonPressed(){
@@ -461,8 +427,8 @@ public class JPanelPersonne extends JDialog {
 
 
 
-    public static void main(String[] args){
-        new JPanelPersonne().setVisible(true);
-    }
+   // public static void main(String[] args){
+        //new CreatePersonne().setVisible(true);
+   // }
 
 }

@@ -8,11 +8,11 @@ public class Pilote extends Personne {
 
     private String no_licence;
     private int nb_vol_effectue = 0;
-    private int niveau;
+    private String niveau;
     private static int nb_pilote = 0;
 
-    public Pilote(String nom, String prenom, String adresse,String ville,int code_postal, int age, Date date_naissance, int poid, int taille, String no_telephone, String no_licence, int niveau){
-        super(nom,prenom,adresse,ville,code_postal,age,date_naissance,poid,taille,no_telephone);
+    public Pilote(String nom, String prenom, String adresse,String ville,String code_postal, int poid, int taille, String no_telephone, String no_licence, String niveau){
+        super(nom,prenom,adresse,ville,code_postal,poid,taille,no_telephone);
         this.no_licence = no_licence;
 	    this.niveau = niveau;
         nb_pilote++;
@@ -24,6 +24,10 @@ public class Pilote extends Personne {
 
     public static int getNb_pilote(){
         return nb_pilote;
+    }
+
+    public String getNiveau(){
+        return this.niveau;
     }
 
     public void setNb_vol_effectue(){

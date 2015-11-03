@@ -23,7 +23,7 @@ public class GestionVector{
     public static ObjectInputStream gestionVolIn;
 
     public static Vector<Parapente> vParapente;
-    public static Vector<Personne> vPersonne;
+    public static Vector<Pilote> vPersonne;
     public static Vector<Vol> vVol;
     public static Vector<GestionVol> vGestionVol;
 
@@ -38,7 +38,7 @@ public class GestionVector{
         return vParapente;
     }
 
-    public static Vector<Personne> getvPersonne(){
+    public static Vector<Pilote> getvPersonne(){
         return vPersonne;
     }
 
@@ -46,7 +46,11 @@ public class GestionVector{
         return vVol;
     }
 
-    public static void addInvPersonne(Personne p){
+    public static Vector<GestionVol> getvGestionVol(){
+        return vGestionVol;
+    }
+
+    public static void addInvPersonne(Pilote p){
         vPersonne.add(p);
     }
 
@@ -56,6 +60,10 @@ public class GestionVector{
 
     public static void addInvVol(Vol v){
         vVol.add(v);
+    }
+
+    public static void addInvGestionVol(GestionVol g){
+        vGestionVol.add(g);
     }
 
     public static void removeInvPersonne(Personne p){
@@ -74,7 +82,7 @@ public class GestionVector{
         vParapente = parapentes;
     }
 
-    public static void setVectorPersonne(Vector<Personne> personnes){
+    public static void setVectorPersonne(Vector<Pilote> personnes){
         vPersonne = personnes;
     }
 
@@ -118,7 +126,7 @@ public class GestionVector{
 
     public static void readAllVector() throws IOException, ClassNotFoundException {
         vParapente = (Vector<Parapente>)parapenteIn.readObject();
-        vPersonne = (Vector<Personne>)personneIn.readObject();
+        vPersonne = (Vector<Pilote>)personneIn.readObject();
         vVol = (Vector<Vol>)volIn.readObject();
         vGestionVol = (Vector<GestionVol>)gestionVolIn.readObject();
     }
