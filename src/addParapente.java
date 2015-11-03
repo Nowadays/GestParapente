@@ -6,6 +6,7 @@ import java.awt.event.*;
  * Created by Morgan on 02/11/2015.
  */
 public class addParapente extends JFrame {
+
     private JPanel rootPanel;
     private JTextField labelTextField;
     private JTextField labelTextField1;
@@ -15,6 +16,7 @@ public class addParapente extends JFrame {
     private JButton button2;
 
     public addParapente() throws HeadlessException {
+
         this.setContentPane(rootPanel);
         this.pack();
         this.setVisible(true);
@@ -43,5 +45,20 @@ public class addParapente extends JFrame {
         public void actionPerformed(ActionEvent e) {
 
         }
+    }
+
+    public static void main(String[] args){
+        try {
+            UIManager.setLookAndFeel("com.bulenkov.darcula.DarculaLaf");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
+        new addParapente();
     }
 }

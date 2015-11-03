@@ -135,7 +135,7 @@
                   <gridbag weightx="0.0" weighty="0.0"/>
                 </constraints>
                 <properties>
-                  <text value="Button"/>
+                  <text value="&amp;Button"/>
                 </properties>
               </component>
               <hspacer id="b665e">
@@ -150,7 +150,7 @@
                   <gridbag weightx="0.0" weighty="0.0"/>
                 </constraints>
                 <properties>
-                  <text value="Button"/>
+                  <text value="B&amp;utton"/>
                 </properties>
               </component>
             </children>
