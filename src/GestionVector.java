@@ -27,6 +27,8 @@ public class GestionVector{
     public static Vector<Vol> vVol;
     public static Vector<GestionVol> vGestionVol;
 
+    public static boolean initiated = false;
+
     public GestionVector() throws IOException {
         vParapente = new Vector<>();
         vPersonne = new Vector<>();

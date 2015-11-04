@@ -1,6 +1,7 @@
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -19,17 +20,20 @@ public class GUIprincipal extends JFrame {
     private JButton supprimerButton;
     private JButton fermerButton;
     private JTabbedPane tabbedPane1;
-    private JTable Vols;
     private JTable clients;
+    private JPanel clientsPanel;
+    private JPanel volsPanel;
     private JPopupMenu ajouterPopup;
     private JMenuItem menuItem1;
     private JMenuItem menuItem2;
     private JMenuItem menuItem3;
+    private JLabel nothingInVector;
 
     private static String[] columnNames = {"Nom", "Pr\u00e9nom", "Adresse", "Ville", "CP", "Poid", "Taille", "T\u00e9l\u00e9phone", "Licence", "Niveau"};
 
     public GUIprincipal() {
         super("heelo world");
+        nothingInVector = new JLabel("Aucun client");
         ajouterPopup = new JPopupMenu();
         menuItem1 = new JMenuItem("Ajouter un Pilote");
         menuItem1.addActionListener(new JButtonListener());
@@ -40,62 +44,27 @@ public class GUIprincipal extends JFrame {
 
 
         this.setContentPane(rootPane);
-
+        nothingInVector.setVisible(false);
+        clientsPanel.add(nothingInVector);
         this.setMinimumSize(new Dimension(800, 800));
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        createUIComponents();
-        this.setVisible(true);
+        this.createUIComponents();
 
     }
 
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
+    public void createUIComponents() {
         tabbedPane1.setBorder(null);
-        Vector<Pilote> p;
-        p = GestionVector.getvPersonne();
-        int tailleTab = GestionVector.getvPersonne().size();
-        int tailleCol = columnNames.length;
-        Object dataClient[][] = new Object[tailleTab][tailleCol];
 
-        for (int i = 0; i < tailleTab; i++) {
-            Pilote pers = p.get(i);
-            dataClient[i][0] = pers.getNom();
-            dataClient[i][1] = pers.getPrenom();
-            dataClient[i][2] = pers.getAdresse();
-            dataClient[i][3] = pers.getVille();
-            dataClient[i][4] = pers.getCode_postal();
-            dataClient[i][5] = pers.getPoid();
-            dataClient[i][6] = pers.getTaille();
-            dataClient[i][7] = pers.getNo_telephone();
-            dataClient[i][8] = pers.getNo_licence();
-            dataClient[i][9] = pers.getNiveau();
-        }
 
-        clients = new JTable(dataClient, columnNames);
-        clients.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        ListSelectionModel listSelectionModel = clients.getSelectionModel();
-        listSelectionModel.addListSelectionListener(new JButtonListener());
-        clients.setSelectionModel(listSelectionModel);
-        clients.getTableHeader().setReorderingAllowed(false);
-        clients.getTableHeader().setResizingAllowed(false);
-        clients.setAutoCreateRowSorter(true);
         ajouterButton.addActionListener(new JButtonListener());
         fermerButton.addActionListener(new JButtonListener());
+        clientsPanel.add(clients);
     }
 
-    public class JButtonListener implements ActionListener, ListSelectionListener {
-        @Override
-        public void valueChanged(ListSelectionEvent e) {
-            if (clients.getSelectedRow() != -1) {
-                supprimerButton.setEnabled(true);
-                modifierButton.setEnabled(true);
-            } else {
-                supprimerButton.setEnabled(false);
-                modifierButton.setEnabled(false);
-            }
-        }
+
+    public class JButtonListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -113,7 +82,7 @@ public class GUIprincipal extends JFrame {
                 ajouterPopup.show(ajouterButton, ajouterButton.getWidth() / 2, ajouterButton.getHeight() / 2);
             } else if (e.getSource() == modifierButton || e.getSource() == supprimerButton) {
                 int i = Integer.parseInt((String) clients.getValueAt(clients.getSelectedRow(), 0));
-                Pilote p = GestionVector.getvPersonne().get(i - 1);
+                Pilote p = GestionVector.getvPersonne().get(i);
                 if (e.getSource() == modifierButton) {
                     //GestionVector.ouvrirFenetreModifierClient(p);
                 }

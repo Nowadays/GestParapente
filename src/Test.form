@@ -17,51 +17,21 @@
         <properties/>
         <border type="none"/>
         <children>
-          <grid id="deaf3" layout-manager="GridBagLayout">
+          <grid id="deaf3" binding="volsPanel" layout-manager="GridBagLayout">
             <constraints>
               <tabbedpane title="Vols"/>
             </constraints>
             <properties/>
             <border type="none"/>
-            <children>
-              <scrollpane id="ea55c">
-                <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="1.0" weighty="1.0"/>
-                </constraints>
-                <properties/>
-                <border type="none"/>
-                <children>
-                  <component id="929c0" class="javax.swing.JTable" binding="Vols">
-                    <constraints/>
-                    <properties/>
-                  </component>
-                </children>
-              </scrollpane>
-            </children>
+            <children/>
           </grid>
-          <grid id="bb994" layout-manager="GridBagLayout">
+          <grid id="bb994" binding="clientsPanel" layout-manager="GridBagLayout">
             <constraints>
               <tabbedpane title="Clients"/>
             </constraints>
             <properties/>
             <border type="none"/>
-            <children>
-              <scrollpane id="983b9">
-                <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="1.0" weighty="1.0"/>
-                </constraints>
-                <properties/>
-                <border type="none"/>
-                <children>
-                  <component id="2fae8" class="javax.swing.JTable" binding="clients">
-                    <constraints/>
-                    <properties/>
-                  </component>
-                </children>
-              </scrollpane>
-            </children>
+            <children/>
           </grid>
         </children>
       </tabbedpane>
