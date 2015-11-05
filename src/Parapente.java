@@ -22,6 +22,7 @@ public class Parapente {
 
 	public String getMarque(){
 		return this.marque;
+
 	}
 
 	public String getNo_immatriculation(){

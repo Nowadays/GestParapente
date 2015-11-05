@@ -93,7 +93,7 @@ public class CreatePersonne extends JDialog {
 
     private GUIprincipal c;
     private Pilote p;
-    private boolean isEdited = false;
+    private int isEdited;
     private int index;
 
 
@@ -110,7 +110,7 @@ public class CreatePersonne extends JDialog {
         this.setVisible(true);
     }
 
-    public CreatePersonne(GUIprincipal c, Pilote p,boolean isEdited, int index){
+    public CreatePersonne(GUIprincipal c, Pilote p,int isEdited, int index){
         this.c = c;
         this.p=p;
         this.isEdited=isEdited;
@@ -480,14 +480,14 @@ public class CreatePersonne extends JDialog {
                 height = Integer.parseInt(saisieTaille.getText());
                 level = saisieNiveau.getText();
                 noLicenceS = saisieNoLicence.getText();
-                if(isEdited){
+                if(isEdited == 1){
                     GestionVector.vPersonne.removeElement(p);
                     GestionVector.vPersonne.add(index,new Pilote(name,fname,adress,city,code, weight,height,phone,noLicenceS,level));
                 }
                 else{
                     GestionVector.addInvPersonne(new Pilote(name,fname,adress,city,code, weight,height,phone,noLicenceS,level));
                 }
-                c.createTableClient(true);
+                c.createTableClient(1);
                 dispose();
 
 
