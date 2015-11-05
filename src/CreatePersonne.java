@@ -2,9 +2,11 @@ import com.sun.xml.internal.bind.v2.model.annotation.RuntimeAnnotationReader;
 
 import javax.swing.*;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  * Created by Morgan on 28/10/2015.
@@ -89,10 +91,15 @@ public class CreatePersonne extends JDialog {
     private final static Color GREY_BACKGROUND = new Color(0x616161);
     private final static Color GREY_TEXTFIELD = new Color(0xBDBDBD);
 
+    private GUIprincipal c;
+    private Pilote p;
+    private boolean isEdited = false;
+    private int index;
 
 
 
-    public CreatePersonne(){
+    public CreatePersonne(GUIprincipal c){
+        this.c = c;
         this.setTitle("Ajouter un client");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -101,6 +108,189 @@ public class CreatePersonne extends JDialog {
         this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         this.createGUI();
         this.setVisible(true);
+    }
+
+    public CreatePersonne(GUIprincipal c, Pilote p,boolean isEdited, int index){
+        this.c = c;
+        this.p=p;
+        this.isEdited=isEdited;
+        this.index = index;
+        this.setTitle("Ajouter un client");
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        this.setModal(true);
+        this.setAlwaysOnTop(true);
+        this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        this.createGUIFilledWithValues();
+        this.setVisible(true);
+    }
+
+    public void createGUIFilledWithValues(){
+        numero = new JLabel("Num\u00e9ro de tel. (*) : ");
+        saisieNumero = new JTextField(p.getNo_telephone());
+        saisieNumero.setPreferredSize(new Dimension(120,20));
+        saisieNumero.setBorder(null);
+        saisieNumero.addKeyListener(new MyListener());
+
+        panelNumero = new JPanel();
+        panelNumero.setLayout(new BoxLayout(panelNumero, BoxLayout.X_AXIS));
+        panelNumero.add(numero);
+        panelNumero.add(saisieNumero);
+
+        panelCivNum = new JPanel();
+        panelCivNum.setLayout(new BoxLayout(panelCivNum, BoxLayout.X_AXIS));
+        panelCivNum.add(panelNumero);
+
+        nom = new JLabel("Nom (*) : ");
+        saisieNom = new JTextField(p.getNom());
+        saisieNom.setPreferredSize(new Dimension(120,20));
+        saisieNom.addKeyListener(new MyListener());
+        saisieNom.setBorder(null);
+        saisieNom.setAlignmentX(Component.RIGHT_ALIGNMENT);
+
+        panelSaisieNom = new JPanel();
+        panelSaisieNom.setLayout(new BoxLayout(panelSaisieNom, BoxLayout.X_AXIS));
+        panelSaisieNom.add(nom);
+        panelSaisieNom.add(saisieNom);
+
+        prenom = new JLabel("Pr\u00e9nom (*) : ");
+        saisiePrenom = new JTextField(p.getPrenom());
+        saisiePrenom.setPreferredSize(new Dimension(120,20));
+        saisiePrenom.addKeyListener(new MyListener());
+        saisiePrenom.setBorder(null);
+        saisiePrenom.setAlignmentX(Component.RIGHT_ALIGNMENT);
+
+        panelSaisiePrenom = new JPanel();
+        panelSaisiePrenom.setLayout(new BoxLayout(panelSaisiePrenom, BoxLayout.X_AXIS));
+        panelSaisiePrenom.add(prenom);
+        panelSaisiePrenom.add(saisiePrenom);
+        panelSaisiePrenom.setBackground(new Color(0x424242));
+
+        adresse = new JLabel("Adresse (*) : ");
+        saisieAdresse = new JTextField(p.getAdresse());
+        saisieAdresse.setPreferredSize(new Dimension(120,20));
+        saisieAdresse.addKeyListener(new MyListener());
+        saisieAdresse.setBorder(null);
+
+        panelAdresse = new JPanel();
+        panelAdresse.setLayout(new BoxLayout(panelAdresse, BoxLayout.X_AXIS));
+        panelAdresse.add(adresse);
+        panelAdresse.add(saisieAdresse);
+        panelAdresse.setBackground(new Color(0x424242));
+
+        codePostal = new JLabel("Code postal (*) : ");
+        saisieCodePostal = new JTextField(p.getCode_postal());
+        saisieCodePostal.setPreferredSize(new Dimension(50,20));
+        saisieCodePostal.setBorder(null);
+        saisieCodePostal.addKeyListener(new MyListener());
+
+        panelCP = new JPanel();
+        panelCP.setLayout(new BoxLayout(panelCP, BoxLayout.X_AXIS));
+        panelCP.add(codePostal);
+        panelCP.add(saisieCodePostal);
+
+        ville = new JLabel("Ville (*) : ");
+        saisieVille = new JTextField(p.getVille());
+        saisieVille.setPreferredSize(new Dimension(50,20));
+        saisieVille.setBorder(null);
+        saisieVille.addKeyListener(new MyListener());
+
+        panelVille = new JPanel();
+        panelVille.setLayout(new BoxLayout(	panelVille, BoxLayout.X_AXIS));
+        panelVille.add(ville);
+        panelVille.add(saisieVille);
+
+        panelCPVille = new JPanel();
+        panelCPVille.setLayout(new BoxLayout(panelCPVille, BoxLayout.X_AXIS));
+        panelCPVille.add(panelCP);
+        panelCPVille.add(Box.createRigidArea(new Dimension(ESPACE,1)));
+        panelCPVille.add(panelVille);
+
+        legende = new JLabel("(*) saisie obligatoire");
+        legende.setAlignmentX(Component.RIGHT_ALIGNMENT);
+
+
+        //boutons
+        bnOK = new JButton("OK");
+        bnOK.setPreferredSize(new Dimension(80, 30));
+        bnOK.addActionListener(new MyListener());
+        bnOK.setEnabled(false);
+        bnAnnuler = new JButton("Annuler");
+        bnAnnuler.setPreferredSize(new Dimension(80, 30));
+        bnAnnuler.addActionListener(new MyListener());
+        panelBoutons = new JPanel();
+        panelBoutons.add(legende);
+        panelBoutons.setLayout(new BoxLayout(panelBoutons, BoxLayout.X_AXIS));
+        panelBoutons.add(Box.createHorizontalGlue());
+        panelBoutons.add(bnOK);
+        panelBoutons.add(Box.createRigidArea(new Dimension(ESPACE,1)));
+        panelBoutons.add(bnAnnuler);
+
+        //panel no licence
+
+        noLicence = new JLabel("Num de licence (*): ");
+        niveau = new JLabel("Niveau (*): ");
+
+        saisieNoLicence = new JTextField(p.getNo_licence());
+        saisieNoLicence.setPreferredSize(new Dimension(120, 20));
+        saisieNoLicence.addKeyListener(new MyListener());
+        saisieNoLicence.setBorder(null);
+        saisieNiveau = new JTextField(p.getNiveau());
+        saisieNiveau.setPreferredSize(new Dimension(50,20));
+        saisieNiveau.addKeyListener(new MyListener());
+        saisieNiveau.setBorder(null);
+
+
+        panelNoLicence = new JPanel();
+        panelNoLicence.setLayout(new BoxLayout(panelNoLicence,BoxLayout.X_AXIS));
+        panelNoLicence.add(noLicence);
+        panelNoLicence.add(saisieNoLicence);
+        panelNoLicence.add(Box.createRigidArea(new Dimension(ESPACE,1)));
+        panelNoLicence.add(niveau);
+        panelNoLicence.add(saisieNiveau);
+
+        //panel poid taille
+        taille = new JLabel("Taille (*): ");
+        poid = new JLabel("Poid (*): ");
+        saisieTaille = new JTextField(Integer.toString(p.getTaille()));
+        saisieTaille.setPreferredSize(new Dimension(30,20));
+        saisieTaille.setBorder(null);
+        saisiePoid = new JTextField(Integer.toString(p.getPoid()));
+        saisiePoid.setPreferredSize(new Dimension(30,20));
+        saisiePoid.setBorder(null);
+        panelTaillePoid = new JPanel();
+        panelTaillePoid.setLayout(new BoxLayout(panelTaillePoid,BoxLayout.X_AXIS));
+        panelTaillePoid.add(taille);
+        panelTaillePoid.add(saisieTaille);
+        panelTaillePoid.add(Box.createRigidArea(new Dimension(ESPACE,1)));
+        panelTaillePoid.add(poid);
+        panelTaillePoid.add(saisiePoid);
+
+
+        //panel principal
+        panelPrincipal = new JPanel();
+        panelPrincipal.setLayout(new BoxLayout(panelPrincipal, BoxLayout.Y_AXIS));
+        panelPrincipal.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+        panelPrincipal.add(panelSaisieNom);
+        panelPrincipal.add(Box.createRigidArea(new Dimension(1,ESPACE)));
+        panelPrincipal.add(panelSaisiePrenom);
+        panelPrincipal.add(Box.createRigidArea(new Dimension(1,ESPACE)));
+        panelPrincipal.add(panelCivNum);
+        panelPrincipal.add(Box.createRigidArea(new Dimension(1,ESPACE)));
+        panelPrincipal.add(panelAdresse);
+        panelPrincipal.add(Box.createRigidArea(new Dimension(1,ESPACE)));
+        panelPrincipal.add(panelCPVille);
+        panelPrincipal.add(Box.createRigidArea(new Dimension(1,ESPACE)));
+        panelPrincipal.add(panelTaillePoid);
+        panelPrincipal.add(Box.createRigidArea(new Dimension(1,ESPACE)));
+        panelPrincipal.add(panelNoLicence);
+        panelPrincipal.add(Box.createRigidArea(new Dimension(1,ESPACE)));
+        panelPrincipal.add(panelBoutons);
+
+
+
+        this.setContentPane(panelPrincipal);
+        this.pack();
     }
 
     public void createGUI(){
@@ -290,10 +480,17 @@ public class CreatePersonne extends JDialog {
                 height = Integer.parseInt(saisieTaille.getText());
                 level = saisieNiveau.getText();
                 noLicenceS = saisieNoLicence.getText();
-                GestionVector.addInvPersonne(new Pilote(name,fname,adress,city,code, weight,height,phone,noLicenceS,level));
-
-
+                if(isEdited){
+                    GestionVector.vPersonne.removeElement(p);
+                    GestionVector.vPersonne.add(index,new Pilote(name,fname,adress,city,code, weight,height,phone,noLicenceS,level));
+                }
+                else{
+                    GestionVector.addInvPersonne(new Pilote(name,fname,adress,city,code, weight,height,phone,noLicenceS,level));
+                }
+                c.createTableClient(true);
                 dispose();
+
+
             }
 
 

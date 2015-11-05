@@ -16,24 +16,7 @@
         </constraints>
         <properties/>
         <border type="none"/>
-        <children>
-          <grid id="deaf3" binding="volsPanel" layout-manager="GridBagLayout">
-            <constraints>
-              <tabbedpane title="Vols"/>
-            </constraints>
-            <properties/>
-            <border type="none"/>
-            <children/>
-          </grid>
-          <grid id="bb994" binding="clientsPanel" layout-manager="GridBagLayout">
-            <constraints>
-              <tabbedpane title="Clients"/>
-            </constraints>
-            <properties/>
-            <border type="none"/>
-            <children/>
-          </grid>
-        </children>
+        <children/>
       </tabbedpane>
       <component id="f7633" class="javax.swing.JButton" binding="ajouterButton" default-binding="true">
         <constraints>

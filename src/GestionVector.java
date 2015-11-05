@@ -31,7 +31,7 @@ public class GestionVector{
 
     public GestionVector() throws IOException {
         vParapente = new Vector<>();
-        vPersonne = new Vector<>();
+        vPersonne = new Vector<Pilote>();
         vVol = new Vector<>();
         vGestionVol = new Vector<>();
     }

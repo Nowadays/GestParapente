@@ -27,11 +27,8 @@ public class Principal {
             }
         };
 
-        File f = new File("C:\\Users\\Morgan\\Google Drive\\GestParapente\\out\\artifacts\\parapente.para");
-        if(f.isFile()) {
-            GestionVector.initInputFile();
-            GestionVector.readAllVector();
-        }
+        GestionVector.initInputFile();
+        GestionVector.readAllVector();
 
         splash.setProgress(60,"Loading files");
         splash.setProgress(100,"Done");
@@ -47,7 +44,7 @@ public class Principal {
     }
 
     public static void ouvrirFenetreAjouterClient(){
-        CreatePersonne c = new CreatePersonne();
-        c.setVisible(true);
+        /*CreatePersonne c = new CreatePersonne();
+        c.setVisible(true);*/
     }
 }
