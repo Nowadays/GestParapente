@@ -1,10 +1,7 @@
-import com.bulenkov.darcula.ui.DarculaTextFieldUI;
-
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -35,6 +32,7 @@ public class GUIprincipal extends JFrame {
 
 
     private String[] columnNames ={"Nom", "Pr\u00e9nom", "Adresse", "Ville", "CP", "Poid", "Taille", "T\u00e9l\u00e9phone", "Licence", "Niveau"};
+	private String[] columnNamesVols = {"Licence","Nom","Date","Depart","Arrive","Passager"};
     private Vector<String> data;
     private Vector<Pilote> p;
     private Vector<Vector<Pilote>> vPilote;
@@ -42,13 +40,13 @@ public class GUIprincipal extends JFrame {
     private JTable vols;
     private DefaultTableModel model;
     private DefaultTableModel modelVol;
-    private JScrollPane sp;
+    private JScrollPane spVols;
+	private JScrollPane spClients;
 
     //private static String[] columnNames = {"Nom", "Pr\u00e9nom", "Adresse", "Ville", "CP", "Poid", "Taille", "T\u00e9l\u00e9phone", "Licence", "Niveau"};
 
     public GUIprincipal() {
         super("heelo world");
-        tableClient = new ClientsTable();
         nothingInVector = new JLabel("Aucun client");
         ajouterPopup = new JPopupMenu();
         menuItem1 = new JMenuItem("Ajouter un Pilote");
@@ -65,9 +63,10 @@ public class GUIprincipal extends JFrame {
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        tabbedPane1.addTab("Vols",new JPanel());
-        tabbedPane1.add("Clients",sp);
+        tabbedPane1.add("Vols", spVols);
+        tabbedPane1.add("Clients", spClients);
         this.createUIComponents();
+        this.createVolTable(0);
         this.createTableClient(0);
         supprimerButton.setEnabled(false);
         modifierButton.setEnabled(false);
@@ -78,9 +77,6 @@ public class GUIprincipal extends JFrame {
 
     public void createUIComponents() {
         tabbedPane1.setBorder(null);
-
-        this.nbClient.setText("Nombre de Clients: "+GestionVector.vPersonne.size());
-        this.nbVols.setText("Nombre de Vols: "+GestionVector.vGestionVol.size());
         ajouterButton.addActionListener(new JButtonListener());
         modifierButton.addActionListener(new JButtonListener());
         supprimerButton.addActionListener(new JButtonListener());
@@ -131,9 +127,9 @@ public class GUIprincipal extends JFrame {
         clients.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 
 
-        sp =  new JScrollPane(clients);
-        tabbedPane1.removeTabAt(1);
-        tabbedPane1.add("Clients",sp);
+        spClients =  new JScrollPane(clients);
+        tabbedPane1.removeTabAt(tabbedPane1.indexOfTab("Clients"));
+        tabbedPane1.add("Clients", spClients);
         switch (whoCalled){
             case 0: tabbedPane1.setSelectedIndex(0);
                 break;
@@ -152,32 +148,31 @@ public class GUIprincipal extends JFrame {
 
     public void createVolTable(int whoCalled){
         int tailleTab = GestionVector.vGestionVol.size();
-        int tailleCol = columnNames.length;
-        Object dataClient[][] = new Object[tailleTab][tailleCol];
+        int tailleCol = columnNamesVols.length;
+        Object dataVol[][] = new Object[tailleTab][tailleCol];
 
         for (int i=0; i<tailleTab; i++){
-            Pilote p= GestionVector.vPersonne.get(i);
-            dataClient[i][0] = p.getNom();
-            dataClient[i][1] = p.getPrenom();
-            dataClient[i][2] = p.getAdresse();
-            dataClient[i][3] = p.getVille();
-            dataClient[i][4] = p.getCode_postal();
-            dataClient[i][5] = p.getPoid();
-            dataClient[i][6] = p.getTaille();
-            dataClient[i][7] = p.getNo_telephone();
-            dataClient[i][8] = p.getNo_licence();
-            dataClient[i][9] = p.getNiveau();
+            GestionVol p = GestionVector.vGestionVol.get(i);
+            dataVol[i][0] = p.get_pilote().getNo_licence();
+	        dataVol[i][2] = p.get_pilote().getNom();
+           /* dataVol[i][3] =
+            dataVol[i][4] =
+            dataVol[i][5] =
+            dataVol[i][6] =
+            dataVol[i][7] =
+            dataVol[i][8] =
+            dataVol[i][9] =*/
         }
-        model = new DefaultTableModel(dataClient,columnNames);
+        model = new DefaultTableModel(dataVol,columnNames);
 
-        clients = new JTable(model);
+        vols = new JTable(model);
 
-        clients.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        vols.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         ListSelectionModel listSelectionModel = clients.getSelectionModel();
         listSelectionModel.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                if (clients.getSelectedRow() != -1) {
+                if (vols.getSelectedRow() != -1) {
                     supprimerButton.setEnabled(true);
                     modifierButton.setEnabled(true);
                 } else {
@@ -186,16 +181,16 @@ public class GUIprincipal extends JFrame {
                 }
             }
         });
-        clients.setSelectionModel(listSelectionModel);
-        clients.getTableHeader().setReorderingAllowed(false);
-        clients.getTableHeader().setResizingAllowed(false);
-        clients.setAutoCreateRowSorter(true);
-        clients.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        vols.setSelectionModel(listSelectionModel);
+        vols.getTableHeader().setReorderingAllowed(false);
+        vols.getTableHeader().setResizingAllowed(false);
+        vols.setAutoCreateRowSorter(true);
+        vols.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 
 
-        sp =  new JScrollPane(clients);
-        tabbedPane1.removeTabAt(1);
-        tabbedPane1.add("Clients",sp);
+        spVols =  new JScrollPane(vols);
+        tabbedPane1.removeTabAt(tabbedPane1.indexOfTab("Vols"));
+        tabbedPane1.add("Vols", spVols);
         switch (whoCalled){
             case 0: tabbedPane1.setSelectedIndex(0);
                 break;

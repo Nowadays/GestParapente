@@ -15,7 +15,7 @@ public class Vol {
 	private String site_depart;
 	private String site_arrive;
 	private Date jour;
-	Calendar calendrier;
+	GregorianCalendar calendrier;
 	private String id_vol;
 	private int duree;
 
@@ -25,11 +25,11 @@ public class Vol {
 		this.id_vol = id_vol;
 		this.duree =duree;
 		jour = new Date();
-		calendrier = GregorianCalendar.getInstance();
+		calendrier = new GregorianCalendar();
 		calendrier.setTime(jour);
 	}
 
-	public Vol(String site_depart, String site_arrive, String id_vol, int duree, Calendar calendrier){
+	public Vol(String site_depart, String site_arrive, String id_vol, int duree, GregorianCalendar calendrier){
 		this.site_depart = site_depart;
 		this.site_arrive = site_arrive;
 		this.id_vol = id_vol;

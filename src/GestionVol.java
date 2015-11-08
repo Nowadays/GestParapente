@@ -7,7 +7,7 @@ import java.util.Vector;
 public class GestionVol {
 
     private static int id_vol = 0;
-    private Personne pilote;
+    private Pilote pilote;
     private Personne passager;
     private Parapente parapente;
     private Vol vol;
@@ -30,5 +30,19 @@ public class GestionVol {
     public static int getId_vol(){
         return id_vol;
     }
+
+    public Pilote get_pilote(){
+	    return this.pilote;
+    }
+
+	public Parapente get_parapente(){
+		return this.parapente;
+	}
+
+	public Vol get_vol(){
+		return this.vol;
+	}
+
+
 
 }
