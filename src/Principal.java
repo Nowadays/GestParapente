@@ -17,7 +17,7 @@ public class Principal {
         UIManager.put("InternalFrame.activeTitleForeground", new ColorUIResource(Color.WHITE));
 
 
-        JSplash splash = new JSplash(Principal.class.getResource("image2.jpg"),true,true,false,"V1.1",null, Color.blue,Color.black);
+        JSplash splash = new JSplash(Principal.class.getResource("image2.png"),true,true,false,"V1.1",null, Color.WHITE,Color.WHITE);
         splash.splashOn();
         Thread.sleep(1000);
         splash.setProgress(20,"Init");
@@ -33,8 +33,9 @@ public class Principal {
 
         GestionVector.initInputFile();
         GestionVector.readAllVector();
-
+        Thread.sleep(1000);
         splash.setProgress(60,"Loading files");
+        Thread.sleep(3000);
         splash.setProgress(100,"Done");
         Thread.sleep(3000);
 

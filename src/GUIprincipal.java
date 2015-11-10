@@ -79,7 +79,7 @@ public class GUIprincipal extends JFrame {
 
 
         this.setContentPane(rootPane);
-	    this.add(searchTextField);
+
         nothingInVector.setVisible(false);
         this.setMinimumSize(new Dimension(1366, 768));
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
