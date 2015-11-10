@@ -1,19 +1,21 @@
+import java.io.Serializable;
+
 /**
  * Created by Morgan on 14/10/2015.
  * Project name : GestParapente.
  */
-public class Parapente {
+public class Parapente implements Serializable{
 
 	private String marque;
 	private String no_immatriculation;
-	private int taille_voile;
-	private int poid_maxi;
+	private String taille_voile;
+	private String poid_maxi;
 	private String modele;
-    private static int nb_parapente = 0;
+    public static int nb_parapente = 0;
 
-	public Parapente(String marque, String no_immatriculation, int taille_voile, int poid_maxi, String modele){
+	public Parapente(String marque, String taille_voile, String poid_maxi, String modele){
 	    this.marque = marque;
-		this.no_immatriculation = no_immatriculation;
+		this.no_immatriculation = Integer.toString(nb_parapente);
 		this.taille_voile = taille_voile;
 		this.poid_maxi = poid_maxi;
 		this.modele = modele;
@@ -29,11 +31,11 @@ public class Parapente {
 		return this.no_immatriculation;
 	}
 
-	public int getTaille_voile(){
+	public String getTaille_voile(){
 		return this.taille_voile;
 	}
 
-	public int getPoid_maxi(){
+	public String getPoid_maxi(){
 		return this.poid_maxi;
 	}
 

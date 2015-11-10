@@ -1,6 +1,7 @@
 import com.thehowtotutorial.splashscreen.JSplash;
 
 import javax.swing.*;
+import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -12,6 +13,9 @@ import java.io.IOException;
 public class Principal {
     public static void main(String[] args) throws InterruptedException, IOException, ClassNotFoundException, IllegalAccessException, UnsupportedLookAndFeelException, InstantiationException {
         UIManager.setLookAndFeel("com.bulenkov.darcula.DarculaLaf");
+        UIManager.put("InternalFrame.activeTitleBackground", new ColorUIResource(Color.black ));
+        UIManager.put("InternalFrame.activeTitleForeground", new ColorUIResource(Color.WHITE));
+
 
         JSplash splash = new JSplash(Principal.class.getResource("image2.jpg"),true,true,false,"V1.1",null, Color.blue,Color.black);
         splash.splashOn();
